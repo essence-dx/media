@@ -100,6 +100,7 @@
 
 pub mod binary;
 pub mod config;
+pub mod dx_config;
 pub mod constants;
 pub mod core;
 pub mod deps;

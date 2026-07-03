@@ -113,6 +113,7 @@ regex = "1"
 # Serialization
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
+toml = "0.8"
 
 # CLI & Terminal
 clap = { version = "4", features = [
@@ -128,6 +129,9 @@ colored = { version = "2", optional = true }
 # Error Handling
 thiserror = "2"
 anyhow = "1"
+
+# DX Serializer (.sr / .machine format)
+serializer = { path = "../serializer", package = "dx-serializer", version = "0.1.0" }
 
 # Logging
 tracing = "0.1"

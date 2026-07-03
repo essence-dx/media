@@ -9,8 +9,19 @@ use std::process::ExitCode;
 
 #[tokio::main]
 async fn main() -> ExitCode {
+    // Load dx-config.toml and create required directories
+    let dx_config = dx_media::dx_config::MediaDxConfig::load(None);
+    let _ = std::fs::create_dir_all(&dx_config.sr_dir_abs());
+    let _ = std::fs::create_dir_all(&dx_config.receipts_dir_abs());
+
     match dx_media::cli::run().await {
-        Ok(()) => ExitCode::SUCCESS,
+        Ok(()) => {
+            let _ = dx_config.write_sr("media", &[("tool", "media"), ("action", "run"), ("status", "ok")]);
+            if let Some(status) = dx_config.read_status("media") {
+                eprintln!("[media] sr cache verified: {} entries", status.len());
+            }
+            ExitCode::SUCCESS
+        }
         Err(e) => {
             eprintln!("Error: {e}");
 
