@@ -149,7 +149,7 @@ dx-font = { path = "font", optional = true }
 # File System
 tempfile = "3"
 directories = "5"
-dirs = "5"
+dirs = "6.0"
 sanitize-filename = "0.6"
 walkdir = "2"
 

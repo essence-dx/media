@@ -104,8 +104,32 @@ impl MediaDxConfig {
         Some(map)
     }
 
+    /// Global cache directory for source-record files.
+    pub fn global_sr_dir(&self) -> PathBuf {
+        dirs::cache_dir()
+            .map(|b| b.join("dx").join("media"))
+            .unwrap_or_else(|| PathBuf::from("~/.cache/dx/media"))
+    }
+
     pub fn machine_path(&self, name: &str) -> PathBuf {
         self.sr_dir_abs().join(format!("{}.machine", name))
+    }
+
+    pub fn write_global_sr(&self, name: &str, entries: &[(&str, &str)]) -> std::io::Result<()> {
+        let path = self.global_sr_dir().join(format!("{}.sr", name));
+        if let Some(parent) = path.parent() {
+            std::fs::create_dir_all(parent)?;
+        }
+        let mut buf: Vec<u8> = Vec::new();
+        for (key, value) in entries {
+            write!(buf, "{key}=")?;
+            Self::write_llm_value(&mut buf, value)?;
+            buf.push(b'\n');
+        }
+        let tmp = path.with_extension("sr.tmp");
+        std::fs::write(&tmp, &buf)?;
+        std::fs::rename(&tmp, path)?;
+        Ok(())
     }
 
     fn write_llm_value(buf: &mut Vec<u8>, value: &str) -> std::io::Result<()> {

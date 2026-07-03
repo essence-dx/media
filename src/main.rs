@@ -17,6 +17,7 @@ async fn main() -> ExitCode {
     match dx_media::cli::run().await {
         Ok(()) => {
             let _ = dx_config.write_sr("media", &[("tool", "media"), ("action", "run"), ("status", "ok")]);
+            let _ = dx_config.write_global_sr("media", &[("tool", "media"), ("action", "run"), ("status", "ok")]);
             if let Some(status) = dx_config.read_status("media") {
                 eprintln!("[media] sr cache verified: {} entries", status.len());
             }
