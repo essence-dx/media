@@ -131,7 +131,7 @@ thiserror = "2"
 anyhow = "1"
 
 # DX Serializer (.sr / .machine format)
-serializer = { path = "../serializer", package = "dx-serializer", version = "0.1.0" }
+serializer = { path = "../serializer", package = "dx-serializer", version = "1.0.0" }
 
 # Logging
 tracing = "0.1"
