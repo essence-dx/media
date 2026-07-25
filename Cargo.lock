@@ -1158,12 +1158,13 @@ dependencies = [
 
 [[package]]
 name = "dx-serializer"
-version = "0.1.0"
+version = "1.0.0"
 dependencies = [
  "bincode",
  "blake3",
  "bytemuck",
  "bytes",
+ "dirs 6.0.0",
  "hashbrown 0.15.5",
  "indexmap",
  "libc",
