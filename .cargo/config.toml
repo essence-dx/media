@@ -1,0 +1,3 @@
+[target.aarch64-linux-android]
+linker = "G:/android-ndk-r27/toolchains/llvm/prebuilt/windows-x86_64/bin/aarch64-linux-android35-clang.cmd"
+ar = "G:/android-ndk-r27/toolchains/llvm/prebuilt/windows-x86_64/bin/llvm-ar.exe"
